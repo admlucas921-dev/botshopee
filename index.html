@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Criar conta | botshopee</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#fff5f0;font-family:system-ui,-apple-system,sans-serif;color:#262626}.card{width:100%;max-width:440px;background:white;border:1px solid #ffe0d2;border-radius:24px;padding:32px;box-shadow:0 16px 48px #6225000d}.brand{color:#e94b24;font-weight:800;font-size:24px;margin-bottom:28px}h1{font-size:28px;margin:0 0 8px}.intro{color:#666;margin:0 0 24px;line-height:1.5}label{display:block;font-size:14px;font-weight:600;margin:16px 0 6px}input{width:100%;padding:13px;border:1px solid #ccc;border-radius:10px;font:inherit}input:focus{outline:3px solid #ffd2bf;border-color:#e94b24}button{width:100%;margin-top:24px;padding:14px;background:#e94b24;color:white;border:0;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}button:hover{background:#cf3b17}button:focus-visible{outline:3px solid #95310e;outline-offset:3px}.note{font-size:13px;color:#777;line-height:1.5;margin:20px 0 0}.status{margin-top:16px;line-height:1.5;color:#17643b}.status:empty{display:none}@media(max-width:480px){.card{padding:24px}}
+</style>
+</head>
+<body>
+<main class="card">
+<div class="brand">botshopee</div>
+<h1>Crie sua conta</h1>
+<p class="intro">Preencha os dados para testar a tela de cadastro.</p>
+<form id="signup">
+<label for="name">Nome completo</label>
+<input id="name" name="name" autocomplete="name" placeholder="Seu nome" required maxlength="100">
+<label for="email">E-mail</label>
+<input id="email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required maxlength="254">
+<label for="password">Senha</label>
+<input id="password" name="password" type="password" autocomplete="new-password" placeholder="Pelo menos 8 caracteres" minlength="8" required>
+<label for="confirm">Confirme a senha</label>
+<input id="confirm" name="confirm" type="password" autocomplete="new-password" placeholder="Repita a senha" minlength="8" required>
+<button type="submit">Testar cadastro</button>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+</form>
+<p class="note">Tela de teste: os dados não são enviados nem salvos. O cadastro real depende da integração com um serviço de autenticação.</p>
+</main>
+<script>
+const form = document.getElementById('signup');
+const password = document.getElementById('password');
+const confirm = document.getElementById('confirm');
+const nameInput = document.getElementById('name');
+const status = document.getElementById('status');
+function validate() {
+confirm.setCustomValidity(confirm.value !== password.value ? 'As senhas precisam ser iguais.' : '');
+nameInput.setCustomValidity(nameInput.value.trim() ? '' : 'Informe seu nome.');
+status.textContent = '';
+}
+form.addEventListener('input', validate);
+form.addEventListener('submit', (event) => {
+event.preventDefault();
+validate();
+if (!form.reportValidity()) return;
+form.reset();
+status.textContent = 'Teste concluído! Os campos foram validados. Nenhuma conta foi criada.';
+});
+</script>
+</body>
+</html>
